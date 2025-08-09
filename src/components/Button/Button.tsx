@@ -1,17 +1,18 @@
 import { forwardRef, type ButtonHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
-
-type ButtonVariant = 'primary' | 'secondary' | 'destructive' | 'outline' | 'ghost';
-type ButtonSize = 'sm' | 'md' | 'lg';
+import type {
+  DefaultComponentSize,
+  DefaultComponentVariant,
+} from '../../types/common';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
+  variant?: DefaultComponentVariant;
+  size?: DefaultComponentSize;
   fullWidth?: boolean;
   loading?: boolean;
 }
 
-function getVariantClasses(variant: ButtonVariant): string {
+function getVariantClasses(variant: DefaultComponentVariant): string {
   switch (variant) {
     case 'secondary':
       return 'bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] hover:bg-[color-mix(in_oklab,var(--color-secondary),black_5%)] border border-[var(--color-border)]';
@@ -27,28 +28,50 @@ function getVariantClasses(variant: ButtonVariant): string {
   }
 }
 
-function getSizeClasses(size: ButtonSize): string {
+function getSizeClasses(size: DefaultComponentSize): string {
   switch (size) {
     case 'sm':
-      return 'h-8 px-3  leading-[var(--leading-normal)] rounded-[var(--radius-sm)]';
+      return 'h-8 px-3 leading-[var(--leading-normal)] rounded-[var(--radius-sm)]';
     case 'lg':
-      return 'h-12 px-6  leading-[var(--leading-normal)] rounded-[var(--radius-lg)]';
+      return 'h-12 px-6 leading-[var(--leading-normal)] rounded-[var(--radius-lg)]';
     case 'md':
     default:
-      return 'h-10 px-4  leading-[var(--leading-normal)] rounded-[var(--radius-md)]';
+      return 'h-10 px-4 leading-[var(--leading-normal)] rounded-[var(--radius-md)]';
   }
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { className = '', variant = 'primary', size = 'md', fullWidth = false, disabled, loading = false, children, ...rest },
+  {
+    className = '',
+    variant = 'primary',
+    size = 'md',
+    fullWidth = false,
+    disabled,
+    loading = false,
+    children,
+    ...rest
+  },
   ref
 ) {
-  const base = 'inline-flex items-center justify-center gap-2 font-semibold transition-colors duration-[var(--duration-normal)] ease-[var(--easing-standard)] shadow-[var(--shadow-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] disabled:opacity-50 disabled:cursor-not-allowed';
+  const base =
+    'inline-flex items-center justify-center gap-2 font-semibold transition-colors duration-[var(--duration-normal)] ease-[var(--easing-standard)] shadow-[var(--shadow-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] disabled:opacity-50 disabled:cursor-not-allowed';
   const width = fullWidth ? 'w-full' : '';
   const spinner = (
-    <svg className="animate-spin h-4 w-4 opacity-80" viewBox="0 0 24 24">
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+    <svg className='animate-spin h-4 w-4 opacity-80' viewBox='0 0 24 24'>
+      <circle
+        className='opacity-25'
+        cx='12'
+        cy='12'
+        r='10'
+        stroke='currentColor'
+        strokeWidth='4'
+        fill='none'
+      />
+      <path
+        className='opacity-75'
+        fill='currentColor'
+        d='M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z'
+      />
     </svg>
   );
 
