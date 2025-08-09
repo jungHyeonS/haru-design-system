@@ -45,6 +45,8 @@
   --color-background: #f0fdf4;
   --color-foreground: #1a202c;
 
+
+  --color-white:#ffffff;
   --color-card: #ffffff;
   --color-card-foreground: #1a202c;
 
@@ -67,8 +69,8 @@
   --color-destructive-foreground: #ffffff;
 
   --color-border: #e2e8f0;
-  --color-input: #e2e8f0;              /* input border color */
-  --color-input-background: #ffffff;   /* 실제 입력 배경 */
+  --color-input: #e2e8f0;            
+  --color-input-background: #ffffff;   
   --color-switch-background: #edf2f7;
   --color-ring: #38a169;
 
