@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import clsx from 'clsx';
-import { twMerge } from 'tailwind-merge';
-import { BsSend } from 'react-icons/bs';
-import { BsMic } from 'react-icons/bs';
-import { BsPaperclip } from 'react-icons/bs';
+import { useState } from "react";
+import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
+import { BsSend } from "react-icons/bs";
+import { BsMic } from "react-icons/bs";
+import { BsPaperclip } from "react-icons/bs";
 
 export interface ChatInputProps {
   placeholder?: string;
@@ -16,7 +16,7 @@ export interface ChatInputProps {
 
 function ChatInput({
   placeholder,
-  minWidth = 'min-w-[600px]',
+  minWidth = "min-w-[600px]",
   onChange,
   onSubmit,
   onMicClick,
@@ -30,11 +30,11 @@ function ChatInput({
     }
   };
   const baseClasses =
-    'w-full relative h-auto p-4 border rounded-lg transition-all duration-200 border-line-default shadow-md';
+    "w-full relative h-auto p-4 border rounded-lg transition-all duration-200 border-line-default shadow-md";
   return (
     <div
       className={clsx(twMerge(baseClasses, minWidth), {
-        'border-primary': isFocused,
+        "border-primary": isFocused,
       })}
     >
       <textarea
@@ -45,44 +45,44 @@ function ChatInput({
         }}
         placeholder={placeholder}
         className={twMerge(
-          'resize-none hover:shadow-none focus:outline-none scrollbar-hide w-full pr-16'
+          "resize-none hover:shadow-none focus:outline-none scrollbar-hide w-full pr-16"
         )}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        style={{ scrollbarWidth: 'none' }}
+        style={{ scrollbarWidth: "none" }}
         onInput={(e) => {
           const target = e.target as HTMLTextAreaElement;
-          target.style.height = 'auto';
-          target.style.height = target.scrollHeight + 'px';
+          target.style.height = "auto";
+          target.style.height = target.scrollHeight + "px";
         }}
         onKeyDown={(e) => {
-          if (e.key === 'Enter' && !e.shiftKey) {
+          if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
             if (onSubmit) onSubmit();
           }
         }}
       />
       <div
-        className='
-      absolute bottom-4  right-4 flex flex-row gap-[8px] items-center justify-center'
+        className="
+      absolute bottom-4  right-4 flex flex-row gap-[8px] items-center justify-center"
       >
         <button
           onClick={onAttachmentClick}
-          className='w-[30px] h-[30px] rounded-md flex items-center justify-center cursor-pointer hover:bg-primary/10'
+          className="w-[30px] h-[30px] rounded-md flex items-center justify-center cursor-pointer hover:bg-primary/10"
         >
           <BsPaperclip />
         </button>
         <button
           onClick={onMicClick}
-          className='w-[30px] h-[30px] rounded-md flex items-center justify-center cursor-pointer hover:bg-primary/10'
+          className="w-[30px] h-[30px] rounded-md flex items-center justify-center cursor-pointer hover:bg-primary/10"
         >
           <BsMic />
         </button>
         <button
           onClick={handleSubmit}
-          className='bg-primary hover:bg-primary/80 shadow-md w-[30px] h-[30px] rounded-md flex items-center justify-center cursor-pointer'
+          className="bg-primary hover:bg-primary/80 shadow-md w-[30px] h-[30px] rounded-md flex items-center justify-center cursor-pointer"
         >
-          <BsSend color='white' />
+          <BsSend color="white" />
         </button>
       </div>
     </div>
