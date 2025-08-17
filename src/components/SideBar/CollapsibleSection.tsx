@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ChevronRightIcon from "./ChevronRightIcon";
+import { BsChevronRight } from "react-icons/bs";
 
 export interface CollapsibleSectionProps {
   title: string;
@@ -35,7 +35,7 @@ const CollapsibleSection = ({
           animate={{ rotate: isOpen ? 90 : 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
         >
-          <ChevronRightIcon />
+          <BsChevronRight/>
         </motion.div>
       </motion.button>
 

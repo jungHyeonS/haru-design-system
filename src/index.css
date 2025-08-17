@@ -52,6 +52,7 @@
   --color-white: #ffffff;
   --color-primary: #38a169;
   --color-primary-foreground: #ffffff;
+  --color-primary-shadow: rgba(56, 161, 105, 0.25); /* 25% opacity of --color-primary */
   --color-secondary: #f7fafc;
   --color-secondary-foreground: #1a202c;
   --color-muted: #f0fff4;
