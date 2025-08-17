@@ -8,7 +8,11 @@ export default {
     ],
   },
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Pretendard', 'Inter', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
   safelist: [
