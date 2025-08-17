@@ -7,6 +7,7 @@ export { default as Dropdown } from "./components/Dropdown/Dropdown";
 export { default as SideBar } from "./components/SideBar/SideBar";
 export { default as Header } from "./components/Header/Header";
 export { default as InputField } from "./components/InputField/InputField";
+export { default as Typography } from "./components/Typography/Typography";
 
 export type { ButtonProps } from "./components/Button/Button";
 export type { ProgressBarProps } from "./components/ProgressBar/ProgressBar";
@@ -15,6 +16,7 @@ export type { DropdownProps } from "./components/Dropdown/Dropdown";
 export type { SideBarProps } from "./components/SideBar/SideBar";
 export type { HeaderProps } from "./components/Header/Header";
 export type { InputFieldProps } from "./components/InputField/InputField";
+export type { TypographyProps } from "./components/Typography/Typography"
 
 // Export sidebar types
 export type {
