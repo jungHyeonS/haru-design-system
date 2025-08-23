@@ -47,6 +47,9 @@ Haru 디자인 시스템은 일관된 UI를 위해 미리 정의된 디자인 �
 | 기본 폰트 굵기 | `--font-weight-normal` | `400` |
 | 세미볼드 굵기 | `--font-weight-semibold` | `600` |
 
+### 컴포넌트 미리보기
+haru-design-system의 모든 컴포넌트는 [Chromatic](https://68a9805813a46b55129f2af9-ozeluookvy.chromatic.com/)을 통해 미리 확인할 수 있습니다.
+
 ## 사용법
 haru-design-system은 아래와같이 사용할수있습니다
 ```
