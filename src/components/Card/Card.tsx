@@ -1,6 +1,10 @@
+"use client";
+
 import { forwardRef, type CSSProperties, type HTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 import type { DefaultComponentSize } from "../../types/common";
+
+
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   size?: DefaultComponentSize;

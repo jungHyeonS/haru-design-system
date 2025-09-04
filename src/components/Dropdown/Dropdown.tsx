@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from 'react';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import { AnimatePresence, motion } from 'framer-motion';

@@ -1,8 +1,11 @@
+"use client";
+
 import React, {
   type CSSProperties,
   type ElementType,
   type HTMLAttributes,
 } from "react";
+
 
 export type TypographyVariant =
   | "h1"
