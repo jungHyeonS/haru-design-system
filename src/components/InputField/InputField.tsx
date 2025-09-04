@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
@@ -33,15 +35,14 @@ const InputField = ({ label, type, placeholder, value, onChange, errorMessage }:
           onChange={onChange}
           whileFocus="focus"
           variants={{
-            focus:{
+            focus: {
               borderColor: '#38a169',
               scale: 1.02,
               transition: { duration: 0.2 }
             }
           }}
-          className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-primary ${
-            errorMessage ? 'border-red-500' : 'border-gray-300'
-          }`}
+          className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-primary ${errorMessage ? 'border-red-500' : 'border-gray-300'
+            }`}
         />
         {type === 'password' && (
           <span
@@ -49,9 +50,9 @@ const InputField = ({ label, type, placeholder, value, onChange, errorMessage }:
             onClick={togglePasswordVisibility}
           >
             {showPassword ? (
-              <FaEyeSlash/>
+              <FaEyeSlash />
             ) : (
-                <FaEye />
+              <FaEye />
             )}
           </span>
         )}
