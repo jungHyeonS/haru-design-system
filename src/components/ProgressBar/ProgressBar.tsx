@@ -1,6 +1,7 @@
 "use client";
 
 import { twMerge } from "tailwind-merge";
+import type { ReactNode } from "react";
 import type {
   DefaultComponentSize,
   DefaultComponentVariant,
@@ -11,7 +12,7 @@ export interface ProgressBarProps {
   width?: string;
   variant?: "primary" | "secondary" | "outline";
   size?: DefaultComponentSize;
-  label?: string;
+  label?: ReactNode;
   value?: number;
   isPercent?: boolean;
 }
@@ -50,9 +51,11 @@ function HaruProgressBar({
 }: ProgressBarProps) {
   const base = "w-full rounded-full overflow-hidden";
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 w-full">
+      {label && (
+        <label className="text-sm font-medium text-gray-700">{label}</label>
+      )}
       <div className="w-full flex flex-row items-center justify-between">
-        <p className="text-sm text-left">{label}</p>
         <p className="text-sm text-right">{isPercent ? `${value}%` : ""}</p>
       </div>
 

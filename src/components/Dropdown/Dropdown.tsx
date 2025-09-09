@@ -14,6 +14,7 @@ export interface DropdownProps {
   value?: string;
   onChange?: (value: string) => void;
   placeholder?: string;
+  label?: React.ReactNode;
 }
 
 function HaruDropdown({
@@ -21,6 +22,7 @@ function HaruDropdown({
   value,
   onChange,
   placeholder = "Select...",
+  label,
 }: DropdownProps) {
   const [open, setOpen] = useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
@@ -51,6 +53,11 @@ function HaruDropdown({
 
   return (
     <div ref={dropdownRef} className="relative w-[200px]">
+      {label && (
+        <label className="mb-1 block text-sm font-medium text-gray-700">
+          {label}
+        </label>
+      )}
       <button
         className="  text-sm w-full border border-line-default shadow-md p-2 rounded-lg text-left bg-white flex items-center justify-between"
         onClick={() => setOpen((o) => !o)}
