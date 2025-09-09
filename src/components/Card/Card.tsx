@@ -4,8 +4,6 @@ import { forwardRef, type CSSProperties, type HTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 import type { DefaultComponentSize } from "../../types/common";
 
-
-
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   size?: DefaultComponentSize;
   width?: number | string;
@@ -41,7 +39,7 @@ function toCssLength(value?: number | string): string | undefined {
   return typeof value === "number" ? `${value}px` : value;
 }
 
-const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
+const HaruCard = forwardRef<HTMLDivElement, CardProps>(function HaruCard(
   { size = "md", width, height, className = "", style, children, ...rest },
   ref
 ) {
@@ -69,4 +67,4 @@ const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
     </div>
   );
 });
-export default Card;
+export default HaruCard;

@@ -1,4 +1,4 @@
-export { default as SideBar } from "./SideBar";
+export { default as HaruSideBar } from "./SideBar";
 export { default as MenuItem } from "./MenuItem";
 export { default as CollapsibleSection } from "./CollapsibleSection";
 export { default as ChevronRightIcon } from "./ChevronRightIcon";

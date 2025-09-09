@@ -17,7 +17,7 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-const Header = forwardRef<HTMLDivElement, HeaderProps>(function Header(
+const HaruHeader = forwardRef<HTMLDivElement, HeaderProps>(function HaruHeader(
   {
     title = "대시보드",
     subtitle,
@@ -86,4 +86,4 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(function Header(
   );
 });
 
-export default Header;
+export default HaruHeader;

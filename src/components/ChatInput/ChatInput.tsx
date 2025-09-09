@@ -16,7 +16,7 @@ export interface ChatInputProps {
   onAttachmentClick?: () => void;
 }
 
-function ChatInput({
+function HaruChatInput({
   placeholder,
   minWidth = "min-w-[600px]",
   onChange,
@@ -91,4 +91,4 @@ function ChatInput({
   );
 }
 
-export default ChatInput;
+export default HaruChatInput;

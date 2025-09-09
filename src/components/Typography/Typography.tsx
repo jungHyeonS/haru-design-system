@@ -6,7 +6,6 @@ import React, {
   type HTMLAttributes,
 } from "react";
 
-
 export type TypographyVariant =
   | "h1"
   | "h2"
@@ -66,7 +65,7 @@ const getVariantElement = (variant: TypographyVariant): ElementType => {
   }
 };
 
-const Typography = ({
+const HaruTypography = ({
   variant = "body",
   children,
   as,
@@ -95,4 +94,4 @@ const Typography = ({
   );
 };
 
-export default Typography;
+export default HaruTypography;

@@ -58,121 +58,127 @@ const ToggleButton = ({
   </button>
 );
 
-const SideBar = forwardRef<HTMLDivElement, SideBarProps>(function SideBar(
-  {
-    variant = "default",
-    collapsible = "none",
-    sections = [],
-    header,
-    footer,
-    onMenuItemClick,
-    className = "",
-    isCollapsed: controlledCollapsed,
-    onCollapseChange,
-    defaultCollapsed = false,
-    style,
-    id,
-  },
-  ref
-) {
-  const [internalCollapsed, setInternalCollapsed] = useState(defaultCollapsed);
+const HaruSideBar = forwardRef<HTMLDivElement, SideBarProps>(
+  function HaruSideBar(
+    {
+      variant = "default",
+      collapsible = "none",
+      sections = [],
+      header,
+      footer,
+      onMenuItemClick,
+      className = "",
+      isCollapsed: controlledCollapsed,
+      onCollapseChange,
+      defaultCollapsed = false,
+      style,
+      id,
+    },
+    ref
+  ) {
+    const [internalCollapsed, setInternalCollapsed] =
+      useState(defaultCollapsed);
 
-  // Use controlled state if provided, otherwise use internal state
-  const isCollapsed =
-    controlledCollapsed !== undefined ? controlledCollapsed : internalCollapsed;
+    // Use controlled state if provided, otherwise use internal state
+    const isCollapsed =
+      controlledCollapsed !== undefined
+        ? controlledCollapsed
+        : internalCollapsed;
 
-  const handleToggle = () => {
-    const newCollapsed = !isCollapsed;
-    if (controlledCollapsed === undefined) {
-      setInternalCollapsed(newCollapsed);
-    }
-    onCollapseChange?.(newCollapsed);
-  };
+    const handleToggle = () => {
+      const newCollapsed = !isCollapsed;
+      if (controlledCollapsed === undefined) {
+        setInternalCollapsed(newCollapsed);
+      }
+      onCollapseChange?.(newCollapsed);
+    };
 
-  const canCollapse = collapsible !== "none";
-  const isIconMode = collapsible === "icon" && isCollapsed;
-  const isOffcanvas = collapsible === "offcanvas";
+    const canCollapse = collapsible !== "none";
+    const isIconMode = collapsible === "icon" && isCollapsed;
+    const isOffcanvas = collapsible === "offcanvas";
 
-  const sidebarClasses = twMerge(
-    "bg-white flex h-full flex-col relative transition-all duration-300",
-    variant === "floating" && "border-line-default rounded-lg border shadow-sm",
-    isIconMode && "w-16",
-    !isIconMode && "w-full",
-    className
-  );
+    const sidebarClasses = twMerge(
+      "bg-white flex h-full flex-col relative transition-all duration-300",
+      variant === "floating" &&
+        "border-line-default rounded-lg border shadow-sm",
+      isIconMode && "w-16",
+      !isIconMode && "w-full",
+      className
+    );
 
-  const contentClasses = "flex min-h-0 flex-1 flex-col gap-2 overflow-auto";
+    const contentClasses = "flex min-h-0 flex-1 flex-col gap-2 overflow-auto";
 
-  // Offcanvas mode - sidebar slides in from left with backdrop
-  if (isOffcanvas) {
-    return (
-      <>
-        <AnimatePresence>
-          {!isCollapsed && (
-            <>
-              {/* Backdrop */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={handleToggle}
-                className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
-              />
-              {/* Sidebar */}
-              <motion.div
-                ref={ref}
-                initial={{ x: "-100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "-100%" }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className={twMerge(
-                  "fixed left-0 top-0 z-50 h-full w-80",
-                  sidebarClasses
-                )}
-                style={style}
-                id={id}
-              >
-                <SidebarContent
-                  sections={sections}
-                  header={header}
-                  footer={footer}
-                  onMenuItemClick={onMenuItemClick}
-                  isIconMode={false}
-                  contentClasses={contentClasses}
+    // Offcanvas mode - sidebar slides in from left with backdrop
+    if (isOffcanvas) {
+      return (
+        <>
+          <AnimatePresence>
+            {!isCollapsed && (
+              <>
+                {/* Backdrop */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={handleToggle}
+                  className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
                 />
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
-      </>
+                {/* Sidebar */}
+                <motion.div
+                  ref={ref}
+                  initial={{ x: "-100%" }}
+                  animate={{ x: 0 }}
+                  exit={{ x: "-100%" }}
+                  transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                  className={twMerge(
+                    "fixed left-0 top-0 z-50 h-full w-80",
+                    sidebarClasses
+                  )}
+                  style={style}
+                  id={id}
+                >
+                  <SidebarContent
+                    sections={sections}
+                    header={header}
+                    footer={footer}
+                    onMenuItemClick={onMenuItemClick}
+                    isIconMode={false}
+                    contentClasses={contentClasses}
+                  />
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        </>
+      );
+    }
+
+    // Icon and default modes
+    return (
+      <motion.div
+        ref={ref}
+        className={sidebarClasses}
+        animate={{ width: isIconMode ? 64 : "auto" }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        style={style}
+        id={id}
+      >
+        {canCollapse && (
+          <ToggleButton isCollapsed={isCollapsed} onClick={handleToggle} />
+        )}
+
+        <SidebarContent
+          sections={sections}
+          header={header}
+          footer={footer}
+          onMenuItemClick={onMenuItemClick}
+          isIconMode={isIconMode}
+          contentClasses={contentClasses}
+        />
+      </motion.div>
     );
   }
-
-  // Icon and default modes
-  return (
-    <motion.div
-      ref={ref}
-      className={sidebarClasses}
-      animate={{ width: isIconMode ? 64 : "auto" }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      style={style}
-      id={id}
-    >
-      {canCollapse && (
-        <ToggleButton isCollapsed={isCollapsed} onClick={handleToggle} />
-      )}
-
-      <SidebarContent
-        sections={sections}
-        header={header}
-        footer={footer}
-        onMenuItemClick={onMenuItemClick}
-        isIconMode={isIconMode}
-        contentClasses={contentClasses}
-      />
-    </motion.div>
-  );
-});
+);
 
 const SidebarContent = ({
   sections,
@@ -298,4 +304,4 @@ const SidebarContent = ({
   </>
 );
 
-export default SideBar;
+export default HaruSideBar;

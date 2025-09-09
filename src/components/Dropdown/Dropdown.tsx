@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
-import { AnimatePresence, motion } from 'framer-motion';
+import React, { useEffect, useState } from "react";
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import { AnimatePresence, motion } from "framer-motion";
 
 export interface DropdownOption {
   label: string | React.ReactNode;
@@ -16,11 +16,11 @@ export interface DropdownProps {
   placeholder?: string;
 }
 
-function Dropdown({
+function HaruDropdown({
   options,
   value,
   onChange,
-  placeholder = 'Select...',
+  placeholder = "Select...",
 }: DropdownProps) {
   const [open, setOpen] = useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
@@ -40,9 +40,9 @@ function Dropdown({
         setOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [open]);
 
@@ -50,17 +50,17 @@ function Dropdown({
     options.find((opt) => opt.value === value)?.label || placeholder;
 
   return (
-    <div ref={dropdownRef} className='relative w-[200px]'>
+    <div ref={dropdownRef} className="relative w-[200px]">
       <button
-        className='  text-sm w-full border border-line-default shadow-md p-2 rounded-lg text-left bg-white flex items-center justify-between'
+        className="  text-sm w-full border border-line-default shadow-md p-2 rounded-lg text-left bg-white flex items-center justify-between"
         onClick={() => setOpen((o) => !o)}
-        type='button'
+        type="button"
       >
         {selectedLabel}
         {open ? (
-          <BsChevronUp className='ml-2' />
+          <BsChevronUp className="ml-2" />
         ) : (
-          <BsChevronDown className='ml-2' />
+          <BsChevronDown className="ml-2" />
         )}
       </button>
       <AnimatePresence>
@@ -70,12 +70,12 @@ function Dropdown({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.2 }}
-            className='absolute left-0 right-0 mt-1 bg-white border border-line-default rounded-lg shadow-lg z-10'
+            className="absolute left-0 right-0 mt-1 bg-white border border-line-default rounded-lg shadow-lg z-10"
           >
             {options.map((opt) => (
               <li
                 key={opt.value}
-                className='p-2 cursor-pointer hover:bg-primary/10 text-sm'
+                className="p-2 cursor-pointer hover:bg-primary/10 text-sm"
                 onClick={() => handleSelect(opt.value)}
               >
                 {opt.label}
@@ -88,4 +88,4 @@ function Dropdown({
   );
 }
 
-export default Dropdown;
+export default HaruDropdown;
