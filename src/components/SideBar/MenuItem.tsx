@@ -1,5 +1,4 @@
 import { twMerge } from "tailwind-merge";
-import { motion, AnimatePresence } from "framer-motion";
 import type { SidebarMenuItem } from "../../types/common";
 import CollapsibleSection from "./CollapsibleSection";
 
@@ -60,59 +59,34 @@ const MenuItem = ({
   }
 
   return (
-    <motion.button
+    <button
       className={twMerge(baseClasses, activeClasses, marginClasses)}
       onClick={handleClick}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
       title={isIconMode ? item.label : undefined}
     >
       <div className="flex items-center gap-3 w-full">
-        {item.icon && (
-          <motion.div
-            animate={{
-              marginRight: isIconMode ? 0 : undefined,
-            }}
-            transition={{ duration: 0.3 }}
-          >
-            {item.icon}
-          </motion.div>
-        )}
+        {item.icon && <div>{item.icon}</div>}
 
-        <AnimatePresence>
-          {!isIconMode && (
-            <motion.span
-              className="text-sm font-medium flex-1 text-left"
-              initial={{ opacity: 0, width: 0 }}
-              animate={{ opacity: 1, width: "auto" }}
-              exit={{ opacity: 0, width: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {item.label}
-            </motion.span>
-          )}
-        </AnimatePresence>
+        {!isIconMode && (
+          <span className="text-sm font-medium flex-1 text-left">
+            {item.label}
+          </span>
+        )}
 
         {item.badge && !isIconMode && (
-          <AnimatePresence>
-            <motion.span
-              className={twMerge(
-                "inline-flex items-center justify-center rounded-md border font-medium w-fit whitespace-nowrap shrink-0 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-[color,box-shadow] overflow-hidden text-xs px-2 py-0.5",
-                item.badge.variant === "primary"
-                  ? "border-transparent bg-primary text-primary-foreground"
-                  : "border-transparent bg-secondary text-secondary-foreground"
-              )}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {item.badge.text}
-            </motion.span>
-          </AnimatePresence>
+          <span
+            className={twMerge(
+              "inline-flex items-center justify-center rounded-md border font-medium w-fit whitespace-nowrap shrink-0 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-[color,box-shadow] overflow-hidden text-xs px-2 py-0.5",
+              item.badge.variant === "primary"
+                ? "border-transparent bg-primary text-primary-foreground"
+                : "border-transparent bg-secondary text-secondary-foreground"
+            )}
+          >
+            {item.badge.text}
+          </span>
         )}
       </div>
-    </motion.button>
+    </button>
   );
 };
 

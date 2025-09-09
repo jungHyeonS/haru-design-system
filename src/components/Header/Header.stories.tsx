@@ -29,22 +29,8 @@ const meta: Meta<HeaderProps> = {
       options: ["default", "sticky", "floating"],
       description: "헤더의 스타일 변형",
     },
-    showMenuButton: {
-      control: "boolean",
-      description: "햄버거 메뉴 버튼 표시 여부",
-    },
-    isMenuOpen: {
-      control: "boolean",
-      description: "메뉴 열림 상태 (햄버거 아이콘 애니메이션)",
-    },
-    onMenuClick: {
-      action: "menu-clicked",
-      description: "메뉴 버튼 클릭 시 호출되는 함수",
-    },
   },
-  args: {
-    onMenuClick: fn(),
-  },
+  args: {},
 } satisfies Meta<typeof Header>;
 
 export default meta;
@@ -53,8 +39,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     title: "대시보드",
-    showMenuButton: true,
-    isMenuOpen: false,
   },
 };
 
@@ -62,8 +46,6 @@ export const WithSubtitle: Story = {
   args: {
     title: "대시보드",
     subtitle: "프로젝트 관리 시스템",
-    showMenuButton: true,
-    isMenuOpen: false,
   },
 };
 
@@ -71,7 +53,6 @@ export const WithoutMenuButton: Story = {
   args: {
     title: "설정",
     subtitle: "시스템 환경설정",
-    showMenuButton: false,
   },
 };
 
@@ -80,7 +61,6 @@ export const Sticky: Story = {
     title: "스크롤 헤더",
     subtitle: "상단에 고정됩니다",
     variant: "sticky",
-    showMenuButton: true,
   },
   decorators: [
     (Story) => (
@@ -108,7 +88,6 @@ export const Floating: Story = {
     title: "플로팅 헤더",
     subtitle: "둥근 모서리와 그림자",
     variant: "floating",
-    showMenuButton: true,
   },
   decorators: [
     (Story) => (
@@ -126,7 +105,6 @@ export const Floating: Story = {
 export const WithCustomContent: Story = {
   args: {
     title: "사용자 정의 헤더",
-    showMenuButton: true,
     rightContent: (
       <div className="flex items-center gap-2">
         <button className="px-3 py-1 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors">
@@ -149,9 +127,6 @@ export const Interactive: Story = {
         <Header
           title="인터랙티브 헤더"
           subtitle="메뉴 버튼을 클릭해보세요"
-          showMenuButton={true}
-          isMenuOpen={isMenuOpen}
-          onMenuClick={() => setIsMenuOpen(!isMenuOpen)}
           rightContent={
             <div className="flex items-center gap-3">
               <span className="text-sm text-gray-600">
@@ -193,7 +168,6 @@ export const Interactive: Story = {
 
 export const CustomLeftContent: Story = {
   args: {
-    showMenuButton: false,
     leftContent: (
       <div className="flex items-center gap-4">
         <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
