@@ -1,6 +1,11 @@
 "use client";
 
-import React, { forwardRef, useState } from "react";
+import React, {
+  forwardRef,
+  useState,
+  type HTMLAttributes,
+  type ReactNode,
+} from "react";
 import { twMerge } from "tailwind-merge";
 import { motion, AnimatePresence } from "framer-motion";
 import type {
@@ -11,16 +16,16 @@ import type {
 } from "../../types/common";
 import MenuItem from "./MenuItem";
 
-export interface SideBarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SideBarProps extends HTMLAttributes<HTMLDivElement> {
   variant?: SidebarVariant;
   collapsible?: SidebarCollapsible;
   sections?: SidebarSection[];
   header?: {
     title: string;
     subtitle?: string;
-    icon?: React.ReactNode;
+    icon?: ReactNode;
   };
-  footer?: React.ReactNode;
+  footer?: ReactNode;
   onMenuItemClick?: (item: SidebarMenuItem) => void;
   className?: string;
   isCollapsed?: boolean;
@@ -41,7 +46,7 @@ const ToggleButton = ({
     className="absolute -right-3 top-6 z-10 flex h-6 w-6 items-center justify-center rounded-full border bg-white shadow-sm hover:bg-gray-50 transition-colors"
     aria-label={isCollapsed ? "사이드바 열기" : "사이드바 닫기"}
   >
-    <motion.svg
+    <svg
       width="12"
       height="12"
       viewBox="0 0 24 24"
@@ -50,11 +55,9 @@ const ToggleButton = ({
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      animate={{ rotate: isCollapsed ? 180 : 0 }}
-      transition={{ duration: 0.3 }}
     >
       <path d="m15 18-6-6 6-6" />
-    </motion.svg>
+    </svg>
   </button>
 );
 
@@ -204,43 +207,27 @@ const SidebarContent = ({
       <div className="h-full flex flex-col">
         {/* Header */}
         {header && (
-          <motion.div
-            className="p-4 border-b border-line-default"
-            animate={{
-              opacity: isIconMode ? 0 : 1,
-              height: isIconMode ? 0 : "auto",
-              padding: isIconMode ? "0 16px" : "16px",
-            }}
-            transition={{ duration: 0.3 }}
-          >
+          <div className="p-4 border-b border-line-default">
             <div className="flex items-center gap-3">
               {header.icon && (
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center shadow-sm">
                   {header.icon}
                 </div>
               )}
-              <AnimatePresence>
-                {!isIconMode && (
-                  <motion.div
-                    className="flex-1"
-                    initial={{ opacity: 0, width: 0 }}
-                    animate={{ opacity: 1, width: "auto" }}
-                    exit={{ opacity: 0, width: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <h1 className="text-lg font-bold text-foreground">
-                      {header.title}
-                    </h1>
-                    {header.subtitle && (
-                      <p className="text-xs text-muted-foreground">
-                        {header.subtitle}
-                      </p>
-                    )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {!isIconMode && (
+                <div className="flex-1">
+                  <h1 className="text-lg font-bold text-foreground">
+                    {header.title}
+                  </h1>
+                  {header.subtitle && (
+                    <p className="text-xs text-muted-foreground">
+                      {header.subtitle}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
-          </motion.div>
+          </div>
         )}
 
         {/* Scrollable content */}
@@ -252,13 +239,9 @@ const SidebarContent = ({
                   {sections.map((section) => (
                     <div key={section.id}>
                       {section.title && !isIconMode && (
-                        <motion.h3
-                          className="px-3 mb-2 text-xs font-medium text-muted-foreground uppercase tracking-wide"
-                          animate={{ opacity: isIconMode ? 0 : 1 }}
-                          transition={{ duration: 0.3 }}
-                        >
+                        <h3 className="px-3 mb-2 text-xs font-medium text-muted-foreground uppercase tracking-wide">
                           {section.title}
-                        </motion.h3>
+                        </h3>
                       )}
                       {section.items.map((item) => (
                         <MenuItem
@@ -280,26 +263,9 @@ const SidebarContent = ({
 
     {/* Footer */}
     {footer && (
-      <motion.div
-        className="border-t border-line-default"
-        animate={{
-          padding: isIconMode ? "8px" : "16px",
-        }}
-        transition={{ duration: 0.3 }}
-      >
-        <AnimatePresence>
-          {!isIconMode && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {footer}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
+      <div className="border-t border-line-default p-4">
+        {!isIconMode && <div>{footer}</div>}
+      </div>
     )}
   </>
 );
