@@ -2,15 +2,12 @@
 
 import React, { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
-import { motion } from "framer-motion";
-import HamburgerIcon from "./HamburgerIcon";
 
-export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
-  title?: string;
-  subtitle?: string;
-  onMenuClick?: () => void;
-  showMenuButton?: boolean;
-  isMenuOpen?: boolean;
+export interface HeaderProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
+  menuButton?: React.ReactNode;
   leftContent?: React.ReactNode;
   rightContent?: React.ReactNode;
   variant?: "default" | "sticky" | "floating";
@@ -21,9 +18,7 @@ const HaruHeader = forwardRef<HTMLDivElement, HeaderProps>(function HaruHeader(
   {
     title = "대시보드",
     subtitle,
-    onMenuClick,
-    showMenuButton = true,
-    isMenuOpen = false,
+    menuButton,
     leftContent,
     rightContent,
     variant = "default",
@@ -41,28 +36,10 @@ const HaruHeader = forwardRef<HTMLDivElement, HeaderProps>(function HaruHeader(
   );
 
   return (
-    <motion.header
-      ref={ref}
-      className={headerClasses}
-      style={style}
-      id={id}
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-    >
+    <div ref={ref} className={headerClasses} style={style} id={id}>
       {/* Left Section */}
       <div className="flex items-center gap-3">
-        {showMenuButton && (
-          <motion.button
-            onClick={onMenuClick}
-            className="flex items-center justify-center w-10 h-10 rounded-lg transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary/20"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label={isMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
-          >
-            <HamburgerIcon isOpen={isMenuOpen} className="text-gray-700" />
-          </motion.button>
-        )}
+        {menuButton && menuButton}
 
         {leftContent ? (
           leftContent
@@ -82,7 +59,7 @@ const HaruHeader = forwardRef<HTMLDivElement, HeaderProps>(function HaruHeader(
       {rightContent && (
         <div className="flex items-center gap-2">{rightContent}</div>
       )}
-    </motion.header>
+    </div>
   );
 });
 
