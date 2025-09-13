@@ -9,6 +9,7 @@ export { default as HaruHeader } from "./components/Header/Header";
 export { default as HaruInputField } from "./components/InputField/InputField";
 export { default as HaruTypography } from "./components/Typography/Typography";
 export { default as HaruCard } from "./components/Card/Card";
+export { default as HaruPagination } from "./components/Pagination/Pagination";
 
 export type { ButtonProps } from "./components/Button/Button";
 export type { ProgressBarProps } from "./components/ProgressBar/ProgressBar";
@@ -19,6 +20,7 @@ export type { HeaderProps } from "./components/Header/Header";
 export type { InputFieldProps } from "./components/InputField/InputField";
 export type { TypographyProps } from "./components/Typography/Typography";
 export type { CardProps } from "./components/Card/Card";
+export type { PaginationProps } from "./components/Pagination/Pagination";
 
 // Export sidebar types
 export type {
